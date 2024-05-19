@@ -19,7 +19,7 @@ export default function AccountForm({ user }: { user: User | null }) {
       const { data, error, status } = await supabase
         .from('profiles')
         .select(`full_name, username, website, avatar_url`)
-        .eq('id', user?.id)
+        .eq('id', user?.id ? user.id : '')
         .single();
 
       if (error && status !== 406) {
@@ -41,7 +41,7 @@ export default function AccountForm({ user }: { user: User | null }) {
   }, [user, supabase]);
 
   useEffect(() => {
-    getProfile();
+    void getProfile(); //返り値無しを明示
   }, [user, getProfile]);
 
   async function updateProfile({
@@ -75,54 +75,37 @@ export default function AccountForm({ user }: { user: User | null }) {
   }
 
   return (
-    <div className='form-widget'>
+    <div className="form-widget">
       <div>
-        <label htmlFor='email'>Email</label>
-        <input id='email' type='text' value={user?.email} disabled />
+        <label htmlFor="email">Email</label>
+        <input disabled id="email" type="text" value={user?.email} />
       </div>
       <div>
-        <label htmlFor='fullName'>Full Name</label>
-        <input
-          id='fullName'
-          type='text'
-          value={fullname || ''}
-          onChange={(e) => setFullname(e.target.value)}
-        />
+        <label htmlFor="fullName">Full Name</label>
+        <input id="fullName" onChange={(e) => setFullname(e.target.value)} type="text" value={fullname || ''} />
       </div>
       <div>
-        <label htmlFor='username'>Username</label>
-        <input
-          id='username'
-          type='text'
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
-        />
+        <label htmlFor="username">Username</label>
+        <input id="username" onChange={(e) => setUsername(e.target.value)} type="text" value={username || ''} />
       </div>
       <div>
-        <label htmlFor='website'>Website</label>
-        <input
-          id='website'
-          type='url'
-          value={website || ''}
-          onChange={(e) => setWebsite(e.target.value)}
-        />
+        <label htmlFor="website">Website</label>
+        <input id="website" onChange={(e) => setWebsite(e.target.value)} type="url" value={website || ''} />
       </div>
 
       <div>
         <button
-          className='button primary block'
-          onClick={() =>
-            updateProfile({ fullname, username, website, avatar_url })
-          }
+          className="button primary block"
           disabled={loading}
+          onClick={() => updateProfile({ fullname, username, website, avatar_url })}
         >
           {loading ? 'Loading ...' : 'Update'}
         </button>
       </div>
 
       <div>
-        <form action='/auth/signout' method='post'>
-          <button className='button block' type='submit'>
+        <form action="/auth/signout" method="post">
+          <button className="button block" type="submit">
             Sign out
           </button>
         </form>
