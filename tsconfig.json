@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    "target": "esnext", //"target": "esnext",にする
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": false,
     "skipLibCheck": true,
@@ -21,7 +22,8 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./*"],
+      "@@/*": ["./*"] //import config from '@@/package.json'みたいなインポートができる
     }
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
