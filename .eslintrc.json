@@ -1,17 +1,11 @@
+//参考https://zenn.dev/siakas/articles/05481bdefacd13
 {
   //recommended-type-checked->推奨ルール
   "extends": [
-    "eslint:recommended",
     "next/core-web-vitals",
     "plugin:@typescript-eslint/recommended-type-checked",
     "plugin:tailwindcss/recommended",
-    "prettier",
-    //https://zenn.dev/shimotaroo/articles/c8f2e751cd7877
-    //Parsing errorが出る場合は"next/babel"を追加
-    "next",
-    "next/core-web-vitals",
-    "prettier",
-    "next/babel"
+    "prettier"
   ],
   "parser": "@typescript-eslint/parser", //TypeScript の構文を解析するためのパーサーを指定
   /*
@@ -22,9 +16,33 @@
     "project": "./tsconfig.json"
   },
   "rules": {
-    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }], //_の引数を無視する
-    "@typescript-eslint/no-misused-promises": "off", //awaitを使ったPromiseのエラーを無視する
-    // "@typescript-eslint/no-redundant-type-constituents": "off", //
+    "@typescript-eslint/consistent-type-imports": [
+      "error",
+      {
+        "prefer": "type-imports", // 型のみをインポートする場合はtype importを使用することを推奨します。
+        "fixStyle": "separate-type-imports" // 自動修正スタイルでは型インポートを他のインポートと分けて記述します。
+      }
+    ],
+    "@typescript-eslint/no-unused-vars": [
+      "warn",
+      {
+        "vars": "all", // 全ての未使用の変数に対して警告を出します。
+        "varsIgnorePattern": "^_", // _で始まる変数名は未使用の警告から除外します。
+        "args": "after-used", // 使用されていない引数のうち、最後に定義された引数以降に対してのみ警告を出します。
+        "argsIgnorePattern": "^_" // _で始まる変数名は未使用の警告から除外します。
+      }
+    ],
+    "object-shorthand": "warn", // オブジェクトリテラルでのショートハンド記法をするように警告します。
+    "tailwindcss/no-custom-classname": "off", // TailwindCSSのカスタムクラス名の使用を許可します。
+    "react/jsx-curly-brace-presence": "error", // JSX内での中括弧の存在を適切に強制します（テキストは中括弧を使用せず、式は使用します）。
+    "react/self-closing-comp": [
+      "error",
+      {
+        "component": true, // 自閉タグを使用しても良いReactコンポーネントでは自閉タグを強制します。
+        "html": false // HTML要素では自閉タグを強制しません。
+      }
+    ],
+    "@next/next/no-img-element": "off", // <img>タグの使用を許可します（Next.jsでは通常、代わりに<next/image>を推奨します）。
     "react/jsx-sort-props": "error" //propsのソート
   }
 }
