@@ -1,3 +1,4 @@
+import { Database } from '@/types/supabase';
 import { createServerClient, type CookieOptions } from '@supabase/ssr';
 import { cookies } from 'next/headers';
 
@@ -13,7 +14,12 @@ export function createClient() {
 
   // 新しく設定されたクッキーを使用してサーバーの Supabase クライアントを作成します。
   // これはユーザーのセッションを維持するために使用できます。
-  return createServerClient(
+  /**cookieセットのところで
+   * Unsafe argument of type `any` assigned to a parameter of type `[key: string, value: string] | [options: RequestCookie]`
+   * と出るがどうにもならないので黙らせてる
+   */
+  //Databaseの型を渡す！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！！
+  return createServerClient<Database>(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
     {
@@ -23,6 +29,7 @@ export function createClient() {
         },
         set(name: string, value: string, options: CookieOptions) {
           try {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             cookieStore.set({ name, value, ...options });
           } catch (error) {
             // `set` メソッドはサーバーコンポーネントから呼び出されました。
@@ -31,6 +38,7 @@ export function createClient() {
         },
         remove(name: string, options: CookieOptions) {
           try {
+            // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
             cookieStore.set({ name, value: '', ...options });
           } catch (error) {
             // `delete` メソッドはサーバーコンポーネントから呼び出されました。
@@ -38,6 +46,6 @@ export function createClient() {
           }
         },
       },
-    }
+    },
   );
 }
