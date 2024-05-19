@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
-    "allowJs": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "strict": true,
     "noEmit": true,
@@ -12,6 +12,9 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "incremental": true,
+    "forceConsistentCasingInFileNames": true, //ファイル名の大文字小文字を区別します。
+    "noImplicitReturns": true, //戻り値がvoid以外の関数において、すべての条件分岐で戻り値を返すよう強制します。
+    "noUncheckedIndexedAccess": true, //インデックス型のプロパティや配列要素を参照したときundefinedのチェックを必須にします。
     "plugins": [
       {
         "name": "next"
