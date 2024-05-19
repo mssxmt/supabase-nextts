@@ -13,6 +13,6 @@
     "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }], //_の引数を無視する
     "@typescript-eslint/no-misused-promises": "off", //awaitを使ったPromiseのエラーを無視する
     // "@typescript-eslint/no-redundant-type-constituents": "off", //
-    "react/jsx-sort-props": "error"
+    "react/jsx-sort-props": "error" //propsのソート
   }
 }
