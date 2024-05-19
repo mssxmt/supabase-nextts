@@ -1,6 +1,18 @@
 {
   //recommended-type-checked->推奨ルール
-  "extends": ["eslint:recommended", "next/core-web-vitals", "plugin:@typescript-eslint/recommended-type-checked"],
+  "extends": [
+    "eslint:recommended",
+    "next/core-web-vitals",
+    "plugin:@typescript-eslint/recommended-type-checked",
+    "plugin:tailwindcss/recommended",
+    "prettier",
+    //https://zenn.dev/shimotaroo/articles/c8f2e751cd7877
+    //Parsing errorが出る場合は"next/babel"を追加
+    "next",
+    "next/core-web-vitals",
+    "prettier",
+    "next/babel"
+  ],
   "parser": "@typescript-eslint/parser", //TypeScript の構文を解析するためのパーサーを指定
   /*
   extendsでrecommended-type-chekced（型情報を利用するルール）を指定すると、このparserOptions.projectの指定が必須となります。
