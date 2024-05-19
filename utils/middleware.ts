@@ -9,6 +9,11 @@ supabase.auth.getUserへの呼び出しで認証トークンを更新します�
 更新された認証トークンを request.cookies.setを通じてサーバー コンポーネントに渡すため、コンポーネント自体が同じトークンを更新しようとしません。
 更新された認証トークンをブラウザーに渡して、古いトークンを置き換えます。これは response.cookies.setで行われます。
 */
+
+/**cookieセットのところで
+ * Unsafe argument of type `any` assigned to a parameter of type `[key: string, value: string] | [options: RequestCookie]`
+ * と出るがどうにもならないので黙らせてる
+ */
 export async function updateSession(request: NextRequest) {
   let response = NextResponse.next({
     request: {
@@ -25,6 +30,7 @@ export async function updateSession(request: NextRequest) {
           return request.cookies.get(name)?.value;
         },
         set(name: string, value: string, options: CookieOptions) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           request.cookies.set({
             name,
             value,
@@ -35,6 +41,7 @@ export async function updateSession(request: NextRequest) {
               headers: request.headers,
             },
           });
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           response.cookies.set({
             name,
             value,
@@ -42,6 +49,7 @@ export async function updateSession(request: NextRequest) {
           });
         },
         remove(name: string, options: CookieOptions) {
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           request.cookies.set({
             name,
             value: '',
@@ -52,6 +60,7 @@ export async function updateSession(request: NextRequest) {
               headers: request.headers,
             },
           });
+          // eslint-disable-next-line @typescript-eslint/no-unsafe-argument
           response.cookies.set({
             name,
             value: '',
@@ -59,7 +68,7 @@ export async function updateSession(request: NextRequest) {
           });
         },
       },
-    }
+    },
   );
 
   // refreshing the auth token
