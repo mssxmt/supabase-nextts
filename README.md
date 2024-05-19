@@ -1,3 +1,18 @@
+## 型の生成方法
+
+```
+npx supabase login
+types/supabase.tsを作成しておいてから
+npx supabase gen types typescript --project-id プロジェクトid --schema public > types/supabase.ts
+```
+
+## このリポジトリの参考
+
+```
+https://zenn.dev/yoshinoki/articles/next-ts-tailwind-setting
+https://github.com/shinaps/nextjs-approuter-supabase-todoapp?tab=readme-ov-file
+```
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
