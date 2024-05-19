@@ -1,3 +1,18 @@
 {
-  "extends": "next/core-web-vitals"
+  //recommended-type-checked->推奨ルール
+  "extends": ["eslint:recommended", "next/core-web-vitals", "plugin:@typescript-eslint/recommended-type-checked"],
+  "parser": "@typescript-eslint/parser", //TypeScript の構文を解析するためのパーサーを指定
+  /*
+  extendsでrecommended-type-chekced（型情報を利用するルール）を指定すると、このparserOptions.projectの指定が必須となります。
+  ここでプロジェクトのtsconfig.jsonのパスを指定することで、ESLintにプロジェクトのTypeScript設定を伝えることができます。
+  */
+  "parserOptions": {
+    "project": "./tsconfig.json"
+  },
+  "rules": {
+    "@typescript-eslint/no-unused-vars": ["error", { "argsIgnorePattern": "^_$" }], //_の引数を無視する
+    "@typescript-eslint/no-misused-promises": "off", //awaitを使ったPromiseのエラーを無視する
+    // "@typescript-eslint/no-redundant-type-constituents": "off", //
+    "react/jsx-sort-props": "error"
+  }
 }
