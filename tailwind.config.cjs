@@ -13,7 +13,8 @@ module.exports = {
   mode: 'jit',
   darkMode: false, // 'media' or 'class',
   purge: {
-    content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}'],
+    //tailwind cssをstoryに対応させるため'./stories/**/*.{js,ts,jsx,tsx,mdx}'
+    content: ['./app/**/*.{js,ts,jsx,tsx}', './components/**/*.{js,ts,jsx,tsx}', './stories/**/*.{js,ts,jsx,tsx,mdx}'],
     options: {
       // https://purgecss.com/safelisting.html#patterns
       safelist: {
@@ -25,9 +26,8 @@ module.exports = {
     './app/**/*.{js,ts,jsx,tsx,mdx}',
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
     './components/**/*.{js,ts,jsx,tsx,mdx}',
-
-    // Or if using `src` directory:
-    './src/**/*.{js,ts,jsx,tsx,mdx}',
+    //tailwind cssをstoryに対応させるため'./stories/**/*.{js,ts,jsx,tsx,mdx}'
+    './stories/**/*.{js,ts,jsx,tsx,mdx}',
   ],
   theme: {
     extend: {},
