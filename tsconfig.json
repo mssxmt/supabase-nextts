@@ -26,6 +26,7 @@
       "@@/*": ["./*"] //import config from '@@/package.json'みたいなインポートができる
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
+  //"**/*.cjs"を含める（tailwind cssをstoryに対応させる）
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "**/*.cjs"],
   "exclude": ["node_modules"]
 }
